@@ -1,0 +1,5 @@
+# requests/api.http
+
+# Send Request
+POST http://127.0.0.1:8000/api/auth/logout
+Authorization: Token b89c12b444702225f6cee336ab2c9e6171acb95834b85d619263c05d00aab777
