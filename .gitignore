@@ -128,14 +128,16 @@ dmypy.json
 # Pyre type checker
 .pyre/
 
-.DS_Store
+**/.DS_Store
 
 # yarn
-.yarn/*
-!.yarn/patches
-!.yarn/releases
-!.yarn/plugins
-!.yarn/sdks
-!.yarn/versions
-.pnp.*
+**/.yarn/*
+**/!.yarn/patches
+**/!.yarn/releases
+**/!.yarn/plugins
+**/!.yarn/sdks
+**/!.yarn/versions
+**/.pnp.*
 
+
+**/node-modules/
