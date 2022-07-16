@@ -1,0 +1,1 @@
+export const Scan = () => <h1>Scan!</h1>;
