@@ -12,7 +12,7 @@ const Container = styled.div`
   text-align: center;
 `;
 
-export const Register: React.FC = () => {
+const Register: React.FC = () => {
   const [errors, setErrors] = useState([""]);
 
   const onFinish = (values: any) => {
@@ -116,4 +116,4 @@ export const Register: React.FC = () => {
   );
 };
 
-export default Register;
+export { Register };

@@ -9,7 +9,7 @@ interface FormItems {
   date: moment.Moment;
 }
 
-export const BadgeScan = () => {
+const BadgeScan = () => {
 
   const onFinish = (values: FormItems) => {
     console.log("Success:", values);
@@ -70,3 +70,5 @@ export const BadgeScan = () => {
     </div>
   );
 };
+
+export { BadgeScan };

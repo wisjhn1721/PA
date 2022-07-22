@@ -12,7 +12,7 @@ const Container = styled.div`
   text-align: center;
 `;
 
-export const Login: React.FC = () => {
+const Login: React.FC = () => {
   const [errors, setErrors] = useState([""]);
 
   const onFinish = (values: any) => {
@@ -81,4 +81,4 @@ export const Login: React.FC = () => {
   );
 };
 
-export default Login;
+export { Login };

@@ -6,7 +6,7 @@ import {
 import { Layout } from 'antd';
 
 // local
-import { BadgeScan, Scan, Register, Login } from "./forms";
+import { BadgeScan, Scan, Register, Login, Home } from "./forms";
 import { Navigation } from "./components/Navigation";
 
 
@@ -31,12 +31,6 @@ const routes = [
     Component: Register
   }
 ];
-
-const Home = () => {
-  return (
-    <h2>Welcome to PerfectAttendance!</h2>
-  )
-}
 
 
 const App = () => {
