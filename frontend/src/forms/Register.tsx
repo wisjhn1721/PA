@@ -1,3 +1,4 @@
+import { useState } from "react";
 import axios from "axios";
 import { Button, Form, Input } from "antd";
 import styled from "styled-components";
@@ -9,6 +10,8 @@ const Container = styled.div`
 `;
 
 export const Register: React.FC = () => {
+  const [errors, setErrors] = useState([""]);
+
   const onFinish = (values: any) => {
     axios
       .post("http://localhost:8000/api/auth/register", values)
@@ -17,6 +20,9 @@ export const Register: React.FC = () => {
       })
       .catch((error) => {
         console.log(error);
+        const errs: { [field: string]: string }[] = error.response.data;
+        const allErrors = Object.entries(errs).map(([_, e]) => e[0]);
+        setErrors(allErrors);
       });
   };
 
@@ -84,6 +90,12 @@ export const Register: React.FC = () => {
         >
           <Input.Password />
         </Form.Item>
+
+        <div style={{ display: "flex", flexDirection: "column", color: "red", margin: 20 }}>
+          {errors.map((error, i) => (
+            <span key={i}>{error}</span>
+          ))}
+        </div>
 
         <Form.Item>
           <Button type="primary" htmlType="submit">
