@@ -6,7 +6,7 @@ import {
 import { Layout } from 'antd';
 
 // local
-import { BadgeScan, Scan, Login, Register } from "./forms";
+import { BadgeScan, Scan, Register, Register } from "./forms";
 import { Navigation } from "./components/Navigation";
 
 
@@ -24,7 +24,7 @@ const routes = [
   },
   {
     path: "/login",
-    Component: Login
+    Component: Register
   },
   {
     path: "register",
@@ -42,23 +42,24 @@ const Home = () => {
 const App = () => {
   return (
     <Router>
-      <Layout className="layout" style={{height:"100vh", overflow: "auto"}}>
+      <Layout className="site-layout">
         <Header>
           <Navigation />
         </Header>
-        <Content style={{ padding: '0 50px', marginTop: 64 }}>
-          <div style={{ background: '#fff', padding: 24, height: '100%' }}>
-            <Routes>
-              <Route path="/" element={<Home />} />
-              {routes.map(({ path, Component }, i) => (
-                <Route
-                  key={i}
-                  path={path}
-                  element={<Component />}
-                />
-              ))}
-            </Routes>
-          </div>
+        <Content
+          className="site-layout-background"
+          style={{ margin: "22px 16px", padding: 40 }}
+        >
+          <Routes>
+            <Route path="/" element={<Home />} />
+            {routes.map(({ path, Component }, i) => (
+              <Route
+                key={i}
+                path={path}
+                element={<Component />}
+              />
+            ))}
+          </Routes>
         </Content>
         <Footer style={{ textAlign: 'center' }}>PerfectAttendance ©2022</Footer>
       </Layout>

@@ -1,14 +1,21 @@
+
 import { Button, DatePicker, Form, Input } from "antd";
-import type { DatePickerProps } from "antd";
+import moment from 'moment';
+
+interface FormItems {
+  badgescan: string;
+  building: string;
+  room: string;
+  date: moment.Moment;
+}
 
 export const BadgeScan = () => {
-  const onFinish = (values: any) => {
+
+  const onFinish = (values: FormItems) => {
     console.log("Success:", values);
+    console.log(values.date.format());
   };
 
-  const onChange: DatePickerProps["onChange"] = (date, dateString) => {
-    console.log(date, dateString);
-  };
 
   return (
     <div>
@@ -19,7 +26,6 @@ export const BadgeScan = () => {
         <Form
           labelCol={{ span: 8 }}
           wrapperCol={{ span: 14 }}
-          initialValues={{}}
           onFinish={onFinish}
           autoComplete="off"
         >
@@ -51,7 +57,7 @@ export const BadgeScan = () => {
             name="date"
             rules={[{ required: true, message: "Please select the date!" }]}
           >
-            <DatePicker onChange={onChange} />
+            <DatePicker />
           </Form.Item>
 
           <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
