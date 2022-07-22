@@ -1,6 +1,10 @@
+import { useState } from "react";
 import axios from "axios";
 import { Button, Form, Input } from "antd";
 import styled from "styled-components";
+
+//local
+import { formatError } from "./common";
 
 const Container = styled.div`
   width: 40%;
@@ -9,6 +13,8 @@ const Container = styled.div`
 `;
 
 export const Login: React.FC = () => {
+  const [errors, setErrors] = useState([""]);
+
   const onFinish = (values: any) => {
     console.log("Success:", values);
     axios
@@ -18,6 +24,8 @@ export const Login: React.FC = () => {
       })
       .catch((error) => {
         console.log(error);
+        const allErrors = formatError(error);
+        setErrors(allErrors);
       });
   };
 
@@ -49,6 +57,19 @@ export const Login: React.FC = () => {
         >
           <Input.Password />
         </Form.Item>
+
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            color: "red",
+            margin: 20,
+          }}
+        >
+          {errors.map((error, i) => (
+            <span key={i}>{error}</span>
+          ))}
+        </div>
 
         <Form.Item>
           <Button type="primary" htmlType="submit">

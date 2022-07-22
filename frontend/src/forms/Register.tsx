@@ -3,6 +3,9 @@ import axios from "axios";
 import { Button, Form, Input } from "antd";
 import styled from "styled-components";
 
+// local
+import { formatError } from "./common";
+
 const Container = styled.div`
   width: 40%;
   margin: 0px auto;
@@ -20,8 +23,7 @@ export const Register: React.FC = () => {
       })
       .catch((error) => {
         console.log(error);
-        const errs: { [field: string]: string }[] = error.response.data;
-        const allErrors = Object.entries(errs).map(([_, e]) => e[0]);
+        const allErrors = formatError(error);
         setErrors(allErrors);
       });
   };
@@ -91,7 +93,14 @@ export const Register: React.FC = () => {
           <Input.Password />
         </Form.Item>
 
-        <div style={{ display: "flex", flexDirection: "column", color: "red", margin: 20 }}>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            color: "red",
+            margin: 20,
+          }}
+        >
           {errors.map((error, i) => (
             <span key={i}>{error}</span>
           ))}
