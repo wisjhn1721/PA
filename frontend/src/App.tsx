@@ -6,7 +6,7 @@ import {
 import { Layout } from 'antd';
 
 // local
-import { BadgeScan, Scan, Register, Register } from "./forms";
+import { BadgeScan, Scan, Register, Login } from "./forms";
 import { Navigation } from "./components/Navigation";
 
 
@@ -16,15 +16,15 @@ const { Header, Content, Footer } = Layout;
 const routes = [
   {
     path: "/badgescan",
-    Component: BadgeScan,
+    Component: BadgeScan
   },
   {
     path: "/scans",
-    Component: Scan,
+    Component: Scan
   },
   {
     path: "/login",
-    Component: Register
+    Component: Login
   },
   {
     path: "register",
