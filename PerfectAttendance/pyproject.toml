@@ -6,7 +6,14 @@ authors = [
     {name = "John Wise", email = "jdwise@uab.edu"},
     {name = "Cameron Wood", email = "cwood611@uab.edu"},
 ]
-dependencies = ["django==4.0.6", "djangorestframework==3.13.1", "django-rest-knox==4.2.0"]
+dependencies = [
+    "django==4.0.6",
+    "djangorestframework==3.13.1",
+    "django-rest-knox==4.2.0",
+    "django-cors-headers>=3.13.0",
+    "djangorestframework-simplejwt>=5.2.0",
+    "setuptools>=63.2.0",
+]
 requires-python = ">=3.8"
 license = {text = "MIT"}
 

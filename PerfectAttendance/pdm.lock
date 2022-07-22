@@ -40,6 +40,15 @@ dependencies = [
 ]
 
 [[package]]
+name = "django-cors-headers"
+version = "3.13.0"
+requires_python = ">=3.7"
+summary = "django-cors-headers is a Django application for handling the server headers required for Cross-Origin Resource Sharing (CORS)."
+dependencies = [
+    "Django>=3.2",
+]
+
+[[package]]
 name = "django-rest-knox"
 version = "4.2.0"
 requires_python = ">=3.6"
@@ -61,14 +70,37 @@ dependencies = [
 ]
 
 [[package]]
+name = "djangorestframework-simplejwt"
+version = "5.2.0"
+requires_python = ">=3.7"
+summary = "A minimal JSON Web Token authentication plugin for Django REST Framework"
+dependencies = [
+    "django",
+    "djangorestframework",
+    "pyjwt<3,>=1.7.1",
+]
+
+[[package]]
 name = "pycparser"
 version = "2.21"
 summary = "C parser in Python"
 
 [[package]]
+name = "pyjwt"
+version = "2.4.0"
+requires_python = ">=3.6"
+summary = "JSON Web Token implementation in Python"
+
+[[package]]
 name = "pytz"
 version = "2022.1"
 summary = "World timezone definitions, modern and historical"
+
+[[package]]
+name = "setuptools"
+version = "63.2.0"
+requires_python = ">=3.7"
+summary = "Easily download, build, install, upgrade, and uninstall Python packages"
 
 [[package]]
 name = "sqlparse"
@@ -84,7 +116,7 @@ summary = "Provider of IANA time zone data"
 
 [metadata]
 lock_version = "3.1"
-content_hash = "sha256:80c9747fab196baad9b41f17f5545694d905b3f5580119559fabfd954ae745f4"
+content_hash = "sha256:54a829b3e19de43dde3bc13817ad80aa139a3af015a7a8dcc0d33b7345c67d8c"
 
 [metadata.files]
 "asgiref 3.5.2" = [
@@ -203,6 +235,10 @@ content_hash = "sha256:80c9747fab196baad9b41f17f5545694d905b3f5580119559fabfd954
     {file = "Django-4.0.6-py3-none-any.whl", hash = "sha256:ca54ebedfcbc60d191391efbf02ba68fb52165b8bf6ccd6fe71f098cac1fe59e"},
     {file = "Django-4.0.6.tar.gz", hash = "sha256:a67a793ff6827fd373555537dca0da293a63a316fe34cb7f367f898ccca3c3ae"},
 ]
+"django-cors-headers 3.13.0" = [
+    {file = "django_cors_headers-3.13.0-py3-none-any.whl", hash = "sha256:37e42883b5f1f2295df6b4bba96eb2417a14a03270cb24b2a07f021cd4487cf4"},
+    {file = "django-cors-headers-3.13.0.tar.gz", hash = "sha256:f9dc6b4e3f611c3199700b3e5f3398c28757dcd559c2f82932687f3d0443cfdf"},
+]
 "django-rest-knox 4.2.0" = [
     {file = "django_rest_knox-4.2.0-py3-none-any.whl", hash = "sha256:62b8e374a44cd4e9617eaefe27c915b301bf224fa6550633d3013d3f9f415113"},
     {file = "django-rest-knox-4.2.0.tar.gz", hash = "sha256:4595f1dc23d6e41af7939e5f2d8fdaf6ade0a74a656218e7b56683db5566fcc9"},
@@ -211,13 +247,25 @@ content_hash = "sha256:80c9747fab196baad9b41f17f5545694d905b3f5580119559fabfd954
     {file = "djangorestframework-3.13.1-py3-none-any.whl", hash = "sha256:24c4bf58ed7e85d1fe4ba250ab2da926d263cd57d64b03e8dcef0ac683f8b1aa"},
     {file = "djangorestframework-3.13.1.tar.gz", hash = "sha256:0c33407ce23acc68eca2a6e46424b008c9c02eceb8cf18581921d0092bc1f2ee"},
 ]
+"djangorestframework-simplejwt 5.2.0" = [
+    {file = "djangorestframework_simplejwt-5.2.0-py3-none-any.whl", hash = "sha256:bcc4cb74dcb637ca1e17eed35276bd618ab19491f8c53e65dee6271177c355e8"},
+    {file = "djangorestframework_simplejwt-5.2.0.tar.gz", hash = "sha256:a60b09afb27d91ad1d7ac904cc632bd52cecead8f389f0fa1532ceb0fb757a74"},
+]
 "pycparser 2.21" = [
     {file = "pycparser-2.21-py2.py3-none-any.whl", hash = "sha256:8ee45429555515e1f6b185e78100aea234072576aa43ab53aefcae078162fca9"},
     {file = "pycparser-2.21.tar.gz", hash = "sha256:e644fdec12f7872f86c58ff790da456218b10f863970249516d60a5eaca77206"},
 ]
+"pyjwt 2.4.0" = [
+    {file = "PyJWT-2.4.0-py3-none-any.whl", hash = "sha256:72d1d253f32dbd4f5c88eaf1fdc62f3a19f676ccbadb9dbc5d07e951b2b26daf"},
+    {file = "PyJWT-2.4.0.tar.gz", hash = "sha256:d42908208c699b3b973cbeb01a969ba6a96c821eefb1c5bfe4c390c01d67abba"},
+]
 "pytz 2022.1" = [
     {file = "pytz-2022.1-py2.py3-none-any.whl", hash = "sha256:e68985985296d9a66a881eb3193b0906246245294a881e7c8afe623866ac6a5c"},
     {file = "pytz-2022.1.tar.gz", hash = "sha256:1e760e2fe6a8163bc0b3d9a19c4f84342afa0a2affebfaa84b01b978a02ecaa7"},
+]
+"setuptools 63.2.0" = [
+    {file = "setuptools-63.2.0-py3-none-any.whl", hash = "sha256:0d33c374d41c7863419fc8f6c10bfe25b7b498aa34164d135c622e52580c6b16"},
+    {file = "setuptools-63.2.0.tar.gz", hash = "sha256:c04b44a57a6265fe34a4a444e965884716d34bae963119a76353434d6f18e450"},
 ]
 "sqlparse 0.4.2" = [
     {file = "sqlparse-0.4.2-py3-none-any.whl", hash = "sha256:48719e356bb8b42991bdbb1e8b83223757b93789c00910a616a071910ca4a64d"},
