@@ -8,6 +8,7 @@ import { Layout } from 'antd';
 // local
 import { BadgeScan, Scan, Register, Login, Home } from "./forms";
 import { Navigation } from "./components/Navigation";
+import { useState } from "react";
 
 
 const { Header, Content, Footer } = Layout;
@@ -27,25 +28,29 @@ const routes = [
     Component: Login
   },
   {
-    path: "register",
+    path: "/register",
     Component: Register
   }
 ];
 
 
 const App = () => {
+  const [user, setUser] = useState(false);
+
+
   return (
     <Router>
       <Layout className="site-layout">
         <Header>
-          <Navigation />
+          <Navigation user={user} />
         </Header>
         <Content
           className="site-layout-background"
           style={{ margin: "22px 16px", padding: 40 }}
         >
           <Routes>
-            <Route path="/" element={<Home />} />
+            <Route path="/" element={user ? <h1>logged in</h1> : <Home />} />
+            
             {routes.map(({ path, Component }, i) => (
               <Route
                 key={i}
