@@ -76,6 +76,7 @@ const Login: React.FC = () => {
             Submit
           </Button>
         </Form.Item>
+        <span style={{ marginLeft: 5 }}>Don't have an account? <a href="/register">Sign Up!</a></span>
       </Form>
     </Container>
   );

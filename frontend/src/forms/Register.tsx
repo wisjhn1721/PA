@@ -111,6 +111,7 @@ const Register: React.FC = () => {
             Submit
           </Button>
         </Form.Item>
+        <span style={{ marginLeft: 5 }}>Already have an account? <a href="/login">Sign In!</a></span>
       </Form>
     </Container>
   );

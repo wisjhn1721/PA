@@ -1,62 +1,69 @@
-import { Button, Form, Input, DatePicker } from "antd";
+import { Button, Form, Input, DatePicker, Select } from "antd";
 import React from "react";
+import styled from "styled-components";
 
 const { RangePicker } = DatePicker;
+const { Option } = Select;
+
+const ContainerStyle = styled.div`
+    width: 70%;
+    margin: 20px auto;
+    padding: 40px;
+    border: 1px solid black;
+    border-radius: 7px;
+`
 
 const Course: React.FC = () => {
   const [form] = Form.useForm();
 
-  const onGenderChange = (value: string) => {
-    switch (value) {
-      case "male":
-        form.setFieldsValue({ note: "Hi, man!" });
-        return;
-      case "female":
-        form.setFieldsValue({ note: "Hi, lady!" });
-        return;
-      case "other":
-        form.setFieldsValue({ note: "Hi there!" });
-    }
-  };
 
   const onFinish = (values: any) => {
     console.log(values);
   };
 
-  const onReset = () => {
-    form.resetFields();
-  };
-
-  const onFill = () => {
-    form.setFieldsValue({
-      note: "Hello world!",
-      gender: "male",
-    });
-  };
-
   return (
-    <Form form={form} name="control-hooks" onFinish={onFinish}>
-      <Form.Item name="name" label="Course Name" rules={[{ required: true }]}>
-        <Input />
-      </Form.Item>
-      <Form.Item name="instructor" label="Course Instructor" rules={[{ required: true }]}>
-        <Input />
-      </Form.Item>
-      <Form.Item name="dates" label="Course Dates" rules={[{ required: true }]}>
-        <RangePicker />
-      </Form.Item>
-      <Form.Item>
-        <Button type="primary" htmlType="submit">
-          Submit
-        </Button>
-        <Button htmlType="button" onClick={onReset}>
-          Reset
-        </Button>
-        <Button type="link" htmlType="button" onClick={onFill}>
-          Fill form
-        </Button>
-      </Form.Item>
-    </Form>
+    <ContainerStyle>
+      <h1 style={{ textAlign: "center" }}>Add Course</h1>
+      <Form form={form} onFinish={onFinish}>
+        <Form.Item name="name" label="Course Name" rules={[{ required: true }]}>
+          <Input />
+        </Form.Item>
+        <Form.Item
+          name="instructor"
+          label="Course Instructor"
+          rules={[{ required: true }]}
+        >
+          <Input />
+        </Form.Item>
+        <Form.Item
+          name="dates"
+          label="Course Dates"
+          rules={[{ required: true }]}
+        >
+          <RangePicker />
+        </Form.Item>
+        <Form.Item
+          name="students"
+          label="Select Students"
+          rules={[{ required: true }]}
+        >
+          <Select
+            mode="multiple"
+            allowClear
+            style={{ width: "100%" }}
+            placeholder="Please select"
+          >
+            <Option key="1">Cameron Wood</Option>
+            <Option key="2">John Wise</Option>
+          </Select>
+        </Form.Item>
+        <Form.Item>
+          <Button type="primary" htmlType="submit">
+            Add New Course
+          </Button>
+        </Form.Item>
+      </Form>
+    </ContainerStyle>
   );
 };
 

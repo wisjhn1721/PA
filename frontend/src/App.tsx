@@ -6,9 +6,10 @@ import {
 import { Layout } from 'antd';
 
 // local
-import { BadgeScan, Scan, Register, Login, Home } from "./forms";
+import { BadgeScan, Scan, Register, Login, Home, Course } from "./forms";
 import { Navigation } from "./components/Navigation";
 import { useState } from "react";
+import { CourseList } from "./components/CourseList";
 
 
 const { Header, Content, Footer } = Layout;
@@ -35,7 +36,7 @@ const routes = [
 
 
 const App = () => {
-  const [user, setUser] = useState(false);
+  const [user, setUser] = useState(true);
 
 
   return (
@@ -49,7 +50,7 @@ const App = () => {
           style={{ margin: "22px 16px", padding: 40 }}
         >
           <Routes>
-            <Route path="/" element={user ? <h1>logged in</h1> : <Home />} />
+            <Route path="/" element={user ? <CourseList /> : <Home />} />
             
             {routes.map(({ path, Component }, i) => (
               <Route
