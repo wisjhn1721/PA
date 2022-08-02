@@ -1,0 +1,12 @@
+version: "3.8"
+services:
+  perfectattendance:
+    # For dev ease of use
+    volumes:
+      - "$PWD/build:/perfectattendance/build"
+      - "$PWD/public:/perfectattendance/public"
+    command: --reload --reload-extra-file ./public
+    deploy:
+      restart_policy:
+        delay: 1s
+        window: 1s

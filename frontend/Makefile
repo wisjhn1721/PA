@@ -1,4 +1,5 @@
 
+.PHONY: build
 
 init:
 	yarn
@@ -9,4 +10,4 @@ build:
 	docker compose build
 
 up:
-	docker compose up --force-recreate
+	docker compose -f docker-compose.yml -f perfectattendance.dev.yml up

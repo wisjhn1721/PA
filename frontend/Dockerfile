@@ -14,7 +14,6 @@ RUN apt-get update -y && \
     python -m pip --no-cache-dir install \
         git+https://github.com/pdm-project/pdm.git && \
     npm install -g npm@latest yarn && \
-    curl -Ls https://cli.doppler.com/install.sh | sh && \
     apt-get --purge remove -y gpg && \
     apt-get autoclean -y && \
     apt-get autoremove -y && \
@@ -24,10 +23,6 @@ RUN apt-get update -y && \
            /var/cache/debconf/templates.dat*
 
 
-COPY pdm.lock pyproject.toml /perfectattendance/
-RUN pdm sync --prod
-
-COPY ./ /perfectattendance
 
 RUN mkdir -p /perfectattendance
 WORKDIR /perfectattendance
