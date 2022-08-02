@@ -1,0 +1,16 @@
+version: "3"
+services:
+  perfectattendance-postgres:
+    build:
+      context: "."
+      dockerfile: "./pgsql/Dockerfile"
+    env_file:
+      - "pgsql/postgres.env"
+    ports:
+      - "5432:5432"
+
+  perfectattendance:
+    container_name: "perfectattendance"
+    build:
+      context: "."
+      dockerfile: "./Dockerfile"

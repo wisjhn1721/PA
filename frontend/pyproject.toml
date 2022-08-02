@@ -1,0 +1,19 @@
+[project]
+name = "Perfect Attendance"
+version = "1.0.0"
+description = ""
+authors = [
+    {name = "Cameronwood611", email = "cwood611@uab.edu"},
+]
+dependencies = [
+    "gunicorn~=20.1",
+    "flask>=2.2.0",
+]
+requires-python = ">=3.8"
+license = {text = "MIT"}
+
+[tool.pdm]
+
+[build-system]
+requires = ["pdm-pep517>=0.12.0"]
+build-backend = "pdm.pep517.api"
