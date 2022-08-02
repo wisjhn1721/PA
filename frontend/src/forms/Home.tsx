@@ -5,7 +5,14 @@ import card1 from "../imgs/card1.jpg";
 import rollcall from "../imgs/rollcall.jpeg";
 import rollsheet from "../imgs/rollsheet.jpg";
 
-const Container = styled.div``;
+const Container = styled.div`
+  width: 60%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin: 0px auto;
+`;
 
 const Header = styled.h2`
   margin-bottom: 20px;
@@ -15,6 +22,12 @@ const Header = styled.h2`
 const SubHeader = styled.div`
   text-align: center;
   margin-bottom: 60px;
+`;
+
+const ImgContainer = styled.div`
+  margin-bottom: 20px;
+  border-radius: 7px;
+  border: 4px solid black;
 `;
 
 const Home = () => {
@@ -28,28 +41,24 @@ const Home = () => {
         </h3>
       </SubHeader>
 
-      <img
-        style={{ float: "left", margin: "5px 20px" }}
-        src={rollcall}
-        width={300}
-        alt="Attendance"
-      />
-      <h4 style={{ textAlign: "justify" }}>No more hand raising.</h4>
-      <br />
-
-      <img
-        style={{ float: "right", marginLeft: 20 }}
-        src={rollsheet}
-        width={300}
-        alt="Roll Call"
-      />
-      <h4 style={{ float: "right" }}>
-        No more attendance sheets that others have to manually grade.
-      </h4>
+      <h4>• No more hand raising.</h4>
+      <ImgContainer>
+        <img src={rollcall} width={300} alt="Attendance" />
+      </ImgContainer>
 
       <br />
-      <img style={{ float: "left" }} src={card1} alt="Student Card Sample" />
-      <h4>Take advantage of your student card.</h4>
+
+      <h4>• No more attendance sheets that others have to manually grade.</h4>
+      <ImgContainer>
+        <img src={rollsheet} width={300} alt="Roll Call" />
+      </ImgContainer>
+
+      <br />
+
+      <h4>• Take advantage of your student card.</h4>
+      <ImgContainer>
+        <img src={card1} alt="Student Card Sample" />
+      </ImgContainer>
     </Container>
   );
 };
