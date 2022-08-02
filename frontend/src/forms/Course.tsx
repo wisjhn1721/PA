@@ -53,8 +53,8 @@ const Course: React.FC = () => {
             style={{ width: "100%" }}
             placeholder="Please select"
           >
-            <Option key="1">Cameron Wood</Option>
-            <Option key="2">John Wise</Option>
+            <Option key="1" value="Cameron Wood">Cameron Wood</Option>
+            <Option key="2" value="John Wise">John Wise</Option>
           </Select>
         </Form.Item>
         <Form.Item>
