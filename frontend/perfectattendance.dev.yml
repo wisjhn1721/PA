@@ -6,7 +6,3 @@ services:
       - "$PWD/build:/perfectattendance/build"
       - "$PWD/public:/perfectattendance/public"
     command: --reload --reload-extra-file ./public
-    deploy:
-      restart_policy:
-        delay: 1s
-        window: 1s

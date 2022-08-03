@@ -8,6 +8,8 @@ authors = [
 dependencies = [
     "gunicorn~=20.1",
     "flask>=2.2.0",
+    "asyncpg>=0.26.0",
+    "flask-cors>=3.0.10",
 ]
 requires-python = ">=3.8"
 license = {text = "MIT"}

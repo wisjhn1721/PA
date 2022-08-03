@@ -17,7 +17,7 @@ const Register: React.FC = () => {
 
   const onFinish = (values: any) => {
     axios
-      .post("http://localhost:8000/api/auth/register", values)
+      .post("http://localhost:5000/api/register", values)
       .then((resp) => {
         console.log(resp);
       })
@@ -34,7 +34,7 @@ const Register: React.FC = () => {
 
   return (
     <Container>
-      <h2>Register an Account</h2>
+      <h2>Register an Account!</h2>
       <Form
         layout="vertical"
         onFinish={onFinish}
@@ -42,9 +42,9 @@ const Register: React.FC = () => {
         autoComplete="off"
       >
         <Form.Item
-          label="Username"
-          name="username"
-          rules={[{ required: true, message: "Please input your username!" }]}
+          label="Full Name"
+          name="name"
+          rules={[{ required: true, message: "Please input your name!" }]}
         >
           <Input />
         </Form.Item>

@@ -41,5 +41,4 @@ RUN yarn build
 
 EXPOSE 5000
 
-ENTRYPOINT ["pdm", "run", "gunicorn", "--workers=4", "--bind=0.0.0.0:5000", "--forwarded-allow-ips=*", "--timeout=300", "build.app:app"]
-CMD []
+ENTRYPOINT ["pdm", "run", "gunicorn", "--bind=0.0.0.0:5000", "build.app:app"]
