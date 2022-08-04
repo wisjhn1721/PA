@@ -12,7 +12,7 @@ CREATE TABLE IF NOT EXISTS course(
     start_date timestamp NOT NULL,
     end_date timestamp NOT NULL,
     PRIMARY KEY (id)
-)
+);
 
 CREATE TABLE IF NOT EXISTS instructor(
     id serial,

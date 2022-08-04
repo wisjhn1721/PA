@@ -17,7 +17,7 @@ const Register: React.FC = () => {
 
   const onFinish = (values: any) => {
     axios
-      .post("http://localhost:5000/api/register", values)
+      .post("/api/register", values)
       .then((resp) => {
         console.log(resp);
       })

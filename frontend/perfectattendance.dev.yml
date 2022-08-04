@@ -1,8 +1,8 @@
 version: "3.8"
 services:
-  perfectattendance:
-    # For dev ease of use
+  pa-client:
     volumes:
-      - "$PWD/build:/perfectattendance/build"
-      - "$PWD/public:/perfectattendance/public"
-    command: --reload --reload-extra-file ./public
+      - "$PWD/client:/pa-client"
+  pa-server:
+    volumes:
+      - "$PWD/api:/pa-server"

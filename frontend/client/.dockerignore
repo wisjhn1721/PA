@@ -1,6 +1,5 @@
-.pdm.toml
-__pypackages__
 node_modules
 *.egg_info
 *.log
 *.env
+Dockerfile

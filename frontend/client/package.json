@@ -1,6 +1,7 @@
 {
   "name": "frontend",
   "version": "0.1.0",
+  "proxy": "http://pa-server:8080",
   "private": true,
   "dependencies": {
     "@craco/craco": "^6.4.0",
@@ -47,7 +48,6 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "http://localhost:5000/",
   "packageManager": "yarn@3.2.1",
   "devDependencies": {
     "@types/styled-components": "5.1.25"

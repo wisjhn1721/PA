@@ -1,0 +1,31 @@
+[project]
+name = "perfectattendance_api"
+version = "0.0.1"
+description = "The API for the Perfect Attendance"
+authors = [
+    {name = "Cameron Wood", email = "cwood611@uab.edu"},
+    {name = "John Wise", email = "jdwise@uab.edu"}
+]
+dependencies = [
+    "flask~=1.1",
+    "gunicorn~=20.1",
+    "psycopg2-binary~=2.8",
+    "flask-cors~=3.0",
+    "markupsafe==2.0.1",
+]
+requires-python = ">=3.9"
+dynamic = ["classifiers"]
+license = {text = "MIT"}
+
+[project.urls]
+homepage = ""
+
+[build-system]
+requires = ["pdm-pep517"]
+build-backend = "pdm.pep517.api"
+
+[tool]
+[tool.pdm]
+[tool.pdm.scripts]
+_.env_file = ".env"
+start = "gunicorn --bind :8080 --workers 1 --threads 8 --timeout 0 main:app"
