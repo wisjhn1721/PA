@@ -2,6 +2,7 @@ import { useState } from "react";
 import axios from "axios";
 import { Button, Form, Input } from "antd";
 import styled from "styled-components";
+import { useNavigate } from "react-router";
 
 
 const Container = styled.div`
@@ -10,15 +11,26 @@ const Container = styled.div`
   text-align: center;
 `;
 
-const Login: React.FC = () => {
+interface LoginProps {
+  onLoggedIn: (val: boolean) => void;
+}
+
+const Login = ({ onLoggedIn }: LoginProps) => {
   const [errors, setErrors] = useState([""]);
+  let navigate = useNavigate();
 
   const onFinish = (values: any) => {
-    console.log("Success:", values);
     axios
       .post("/api/login", values)
       .then((resp) => {
-        console.log(resp);
+        const res = resp.data;
+        if (res.success) {
+          onLoggedIn(true);
+          navigate("/");
+          return;
+        }
+        // else, error
+        setErrors(res.errors);
       })
       .catch((error) => {
         console.log(error);
@@ -39,9 +51,9 @@ const Login: React.FC = () => {
         autoComplete="off"
       >
         <Form.Item
-          label="Username"
-          name="username"
-          rules={[{ required: true, message: "Please input your username!" }]}
+          label="Email"
+          name="email"
+          rules={[{ required: true, message: "Please input your email!" }]}
         >
           <Input />
         </Form.Item>

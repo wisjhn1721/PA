@@ -54,7 +54,10 @@ const Register = ({ onLoggedIn }: RegisterProps) => {
         <Form.Item
           label="Full Name"
           name="name"
-          rules={[{ required: true, message: "Please input your name!" }]}
+          rules={[
+            { required: true, message: "Please input your name!" },
+            { min: 3, message: 'Name must be minimum of 3 characters.' }
+          ]}
         >
           <Input />
         </Form.Item>
@@ -73,7 +76,14 @@ const Register = ({ onLoggedIn }: RegisterProps) => {
         <Form.Item
           label="Password"
           name="password"
-          rules={[{ required: true, message: "Please input your password!" }]}
+          rules={[
+            { required: true, message: "Please input your password!" },
+            { min: 7, message: 'Password must be minimum of 7 characters.' },
+            {
+              pattern: new RegExp('^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$'),
+              message: 'Password must contain at least one lowercase letter, uppercase letter, number, and special character'
+          }
+          ]}
         >
           <Input.Password />
         </Form.Item>

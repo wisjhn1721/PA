@@ -30,7 +30,7 @@ const App = () => {
     },
     {
       path: "/login",
-      Component: <Login />
+      Component: <Login onLoggedIn={(val) => setUser(val)} />
     },
     {
       path: "/register",

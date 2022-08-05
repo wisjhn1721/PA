@@ -9,10 +9,7 @@ from flask_cors.decorator import cross_origin
 from flask import Flask, json, jsonify, request, send_file
 from werkzeug.wrappers.response import Response
 from werkzeug.security import check_password_hash, generate_password_hash
-import asyncio
 
-import psycopg2
-from psycopg2.extras import DictCursor
 
 # local
 from psqlconnect import database_execute, database_query
@@ -61,26 +58,40 @@ def test():
 #     ...
 
 
-# @bp.route("/api/login")
-# def login():
-#     ...
+@app.route("/api/login", methods=["POST"])
+def login():
+    req_json = request.json
+    assert isinstance(req_json, dict)
+
+    email = req_json.get("email")
+    password = req_json.get("password")
+
+    possible_account = database_query("SELECT * FROM instructor where email = %s;", (email,))
+    if possible_account:
+        account = [{**r} for r in possible_account][0]
+        pass_hash = account["password_hash"]
+        print(check_password_hash(pass_hash, password))
+        if check_password_hash(pass_hash, password):
+            return jsonify({ "success": True })
+    return json.dumps({ "errors": ["The email/password combination failed!"] })
+
 
 @app.route("/api/register", methods=["POST"])
 def register():
     req_json = request.json
-    assert req_json
+    assert isinstance(req_json, dict)
 
-    print(req_json)
     name = req_json.get("name")
     email = req_json.get("email")
     password = req_json.get("password")
     password_hash = generate_password_hash(password)
 
-    duplicate_email = database_query("SELECT * FROM instructor where email = $1", (email, ))
+    duplicate_email = database_query("SELECT * FROM instructor where email = %s", (email, ))
+    print(duplicate_email)
     if duplicate_email:
         return json.dumps({ "errors": ["That email already exists!"] })
 
-    query = "INSERT INTO instructor VALUES ($1, $2, $3);"
+    query = "INSERT INTO instructor (full_name, email, password_hash) VALUES (%s, %s, %s);"
     args = (name, email, password_hash)
 
     database_execute(query, args)

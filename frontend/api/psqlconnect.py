@@ -12,8 +12,8 @@ url =  "postgres://postgres:postgres@pa-postgres:5432/perfectattendance"
 
 def _connect():
     kwargs = {
-        "user": "superuser",
-        "password": "1234",
+        "user": "postgres",
+        "password": "new_password",
         "host": "pa-postgres",
         "dbname": "perfectattendance"
     }
@@ -24,12 +24,13 @@ def database_execute(query: str, args):
     conn = _connect()
     with conn.cursor() as cursor:
         cursor.execute(query, args)
+        conn.commit()
     conn.close()
 
 
 def database_query(query: str, args):
     conn = _connect()
-    with conn.cursor() as cursor:
+    with conn.cursor(cursor_factory=DictCursor) as cursor:
         cursor.execute(query, args)
         rows = cursor.fetchall()
     conn.close()
