@@ -33,5 +33,6 @@ CREATE TABLE IF NOT EXISTS student_to_course (
 
 
 GRANT SELECT, INSERT, UPDATE ON ALL TABLES IN SCHEMA public TO superuser;
+GRANT USAGE, SELECT ON ALL SEQUENCES IN SCHEMA public TO superuser;
 ALTER USER postgres WITH PASSWORD 'new_password';
 
