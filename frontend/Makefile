@@ -1,10 +1,11 @@
 
 .PHONY: build
 
+CWD := $(shell pwd)
+
 init:
-	yarn
-	pdm sync
-	yarn build
+	cd $(CWD)/client; yarn
+	cd $(CWD)/api; pdm sync
 
 build:
 	docker compose -f docker-compose.yml -f *.dev.yml build
