@@ -98,54 +98,6 @@ def register():
     return json.dumps({ "success": True })
 
 
-# @app.route("/get-genres")
-# @cross_origin()
-# def get_genres():
-#     records = database_query("SELECT * FROM genre;", tuple())
-#     return jsonify([{**record} for record in records])
-
-
-# @app.route("/get-adventures")
-# @cross_origin()
-# def get_adventures():
-#     records = database_query("SELECT * FROM adventure;", tuple())
-#     return jsonify([{**record} for record in records])
-
-
-# @app.route("/add-adventure", methods=["POST"])
-# @cross_origin()
-# def add_adventure():
-#     LOG.warning("/add-adventure called")
-#     genre_id = request.json.get("genre_id")
-#     name = request.json.get("name")
-#     description = request.json.get("description")
-#     creator = request.json.get("creator") or "Anonymous"
-#     paths = request.json.get("paths")
-
-#     query = """
-#     INSERT INTO adventure (
-#         genre_id, 
-#         name, 
-#         description, 
-#         creator, 
-#         paths
-#     ) 
-#     VALUES (
-#         %s, 
-#         %s, 
-#         %s,
-#         %s,
-#         %s
-#     ) RETURNING id;
-#     """
-
-    # records = database_query(
-    #     query, (genre_id, name, description, creator, json.dumps(paths))
-    # )
-
-    # return str(records[0]), 200
-
-
 if __name__ == "__main__":
     debug = True
     app.run(debug=debug, host="0.0.0.0")
