@@ -47,7 +47,6 @@ def test():
     return "Yes, we're here.", 200
 
 
-
 # @bp.route("/api/get-courses")
 # def get_courses():
 #     return { "courses": "one" }
@@ -87,7 +86,6 @@ def register():
     password_hash = generate_password_hash(password)
 
     duplicate_email = database_query("SELECT * FROM instructor where email = %s", (email, ))
-    print(duplicate_email)
     if duplicate_email:
         return json.dumps({ "errors": ["That email already exists!"] })
 

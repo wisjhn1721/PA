@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Button, Table } from "antd";
+import { Table } from "antd";
 import type { ColumnsType } from 'antd/es/table';
 
 // LOCAL
@@ -61,6 +61,7 @@ const columns: ColumnsType<DataType> = [
 
 const CourseList = () => {
   const [isLoading, setIsLoading] = useState(false);
+  
   return (
     <Table
       size="middle"
