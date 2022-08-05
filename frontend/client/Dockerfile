@@ -1,4 +1,4 @@
-FROM node:14
+FROM node:16.16
 
 RUN mkdir -p /pa-client
 WORKDIR /pa-client
