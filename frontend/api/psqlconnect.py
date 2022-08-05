@@ -8,26 +8,27 @@ from psycopg2.extras import DictCursor
 
 
 LOG = logging.getLogger(__name__)
-url =  "postgres://postgres:postgres@perfectattendance-postgres:5432/perfectattendance"
+url =  "postgres://postgres:postgres@pa-postgres:5432/perfectattendance"
 
-def connect_from_env():
+def _connect():
     kwargs = {
-        "user": os.getenv("PG_USER"),
-        "password": os.getenv("PG_PASSWORD"),
-        "host": os.getenv("PG_HOST"),
+        "user": "superuser",
+        "password": "1234",
+        "host": "pa-postgres",
+        "dbname": "perfectattendance"
     }
     return psycopg2.connect(**kwargs, cursor_factory=DictCursor)
 
 
 def database_execute(query: str, args):
-    conn = connect_from_env()
+    conn = _connect()
     with conn.cursor() as cursor:
         cursor.execute(query, args)
     conn.close()
 
 
 def database_query(query: str, args):
-    conn = connect_from_env()
+    conn = _connect()
     with conn.cursor() as cursor:
         cursor.execute(query, args)
         rows = cursor.fetchall()

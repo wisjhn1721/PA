@@ -30,3 +30,8 @@ CREATE TABLE IF NOT EXISTS student_to_course (
     FOREIGN KEY (student_id) REFERENCES student (id),
     FOREIGN KEY (course_id) REFERENCES course (id)
 );
+
+
+GRANT SELECT, INSERT, UPDATE ON ALL TABLES IN SCHEMA public TO superuser;
+ALTER USER postgres WITH PASSWORD 'new_password';
+

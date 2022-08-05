@@ -2,9 +2,7 @@ import { useState } from "react";
 import axios from "axios";
 import { Button, Form, Input } from "antd";
 import styled from "styled-components";
-
-// local
-import { formatError } from "./common";
+import { useNavigate } from "react-router-dom";
 
 const Container = styled.div`
   width: 40%;
@@ -12,19 +10,31 @@ const Container = styled.div`
   text-align: center;
 `;
 
-const Register: React.FC = () => {
+interface RegisterProps {
+  onLoggedIn: (val: boolean) => void;
+}
+
+const Register = ({ onLoggedIn }: RegisterProps) => {
   const [errors, setErrors] = useState([""]);
 
+  let navigate = useNavigate();
   const onFinish = (values: any) => {
     axios
       .post("/api/register", values)
       .then((resp) => {
         console.log(resp);
+        const res = resp.data;
+        if (res.success) {
+          onLoggedIn(true);
+          navigate("/");
+
+          return;
+        }
+        // else, error
+        setErrors(res.errors);
       })
       .catch((error) => {
         console.log(error);
-        const allErrors = formatError(error);
-        setErrors(allErrors);
       });
   };
 
@@ -34,7 +44,7 @@ const Register: React.FC = () => {
 
   return (
     <Container>
-      <h2>Register an Account!</h2>
+      <h2>Register an Account</h2>
       <Form
         layout="vertical"
         onFinish={onFinish}
@@ -111,7 +121,9 @@ const Register: React.FC = () => {
             Submit
           </Button>
         </Form.Item>
-        <span style={{ marginLeft: 5 }}>Already have an account? <a href="/login">Sign In!</a></span>
+        <span style={{ marginLeft: 5 }}>
+          Already have an account? <a href="/login">Sign In!</a>
+        </span>
       </Form>
     </Container>
   );

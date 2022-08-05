@@ -3,8 +3,6 @@ import axios from "axios";
 import { Button, Form, Input } from "antd";
 import styled from "styled-components";
 
-//local
-import { formatError } from "./common";
 
 const Container = styled.div`
   width: 40%;
@@ -18,14 +16,12 @@ const Login: React.FC = () => {
   const onFinish = (values: any) => {
     console.log("Success:", values);
     axios
-      .post("http://localhost:8000/api/auth/login", values)
+      .post("/api/login", values)
       .then((resp) => {
         console.log(resp);
       })
       .catch((error) => {
         console.log(error);
-        const allErrors = formatError(error);
-        setErrors(allErrors);
       });
   };
 

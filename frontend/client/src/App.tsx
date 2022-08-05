@@ -6,7 +6,7 @@ import {
 import { Layout } from 'antd';
 
 // local
-import { BadgeScan, Scan, Register, Login, Home, Course } from "./forms";
+import { BadgeScan, Scan, Register, Login, Home } from "./forms";
 import { Navigation } from "./components/Navigation";
 import { useState } from "react";
 import { CourseList } from "./components/CourseList";
@@ -15,28 +15,28 @@ import { CourseList } from "./components/CourseList";
 const { Header, Content, Footer } = Layout;
 
 
-const routes = [
-  {
-    path: "/badgescan",
-    Component: BadgeScan
-  },
-  {
-    path: "/scans",
-    Component: Scan
-  },
-  {
-    path: "/login",
-    Component: Login
-  },
-  {
-    path: "/register",
-    Component: Register
-  }
-];
-
 
 const App = () => {
   const [user, setUser] = useState(false);
+
+  const routes = [
+    {
+      path: "/badgescan",
+      Component: <BadgeScan />
+    },
+    {
+      path: "/scans",
+      Component: <Scan />
+    },
+    {
+      path: "/login",
+      Component: <Login />
+    },
+    {
+      path: "/register",
+      Component: <Register onLoggedIn={(val) => setUser(val)} />
+    }
+  ];
 
 
   return (
@@ -56,7 +56,7 @@ const App = () => {
               <Route
                 key={i}
                 path={path}
-                element={<Component />}
+                element={Component}
               />
             ))}
           </Routes>

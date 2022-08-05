@@ -6565,6 +6565,7 @@ __metadata:
     craco-less: ^2.0.0
     react: ^18.2.0
     react-dom: ^18.2.0
+    react-router: ^6.3.0
     react-router-dom: ^6.3.0
     react-scripts: 5.0.1
     styled-components: 5.2.1
@@ -11424,7 +11425,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-router@npm:6.3.0":
+"react-router@npm:6.3.0, react-router@npm:^6.3.0":
   version: 6.3.0
   resolution: "react-router@npm:6.3.0"
   dependencies:

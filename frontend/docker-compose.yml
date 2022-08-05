@@ -1,6 +1,6 @@
 version: "3"
 services:
-  perfectattendance-postgres:
+  pa-postgres:
     build:
       context: "."
       dockerfile: "./pgsql/Dockerfile"

@@ -14,6 +14,9 @@ import asyncio
 import psycopg2
 from psycopg2.extras import DictCursor
 
+# local
+from psqlconnect import database_execute, database_query
+
 app = Flask(__name__)
 flask_cors.CORS(app)
 
@@ -33,33 +36,6 @@ def before_request():
     LOG.info("Info test")
     LOG.warning("Warning test")
     LOG.error("Error test")
-
-
-def connect_from_env():
-    kwargs = {
-        "user": os.getenv("PG_USER"),
-        "password": os.getenv("PG_PASSWORD"),
-        "host": os.getenv("PG_HOST"),
-    }
-    conn = psycopg2.connect(**kwargs, cursor_factory=DictCursor)
-    conn.autocommit = True
-    return conn
-
-
-def database_execute(query: str, args):
-    conn = connect_from_env()
-    with conn.cursor() as cursor:
-        cursor.execute(query, args)
-    conn.close()
-
-
-def database_query(query: str, args):
-    conn = connect_from_env()
-    with conn.cursor() as cursor:
-        cursor.execute(query, args)
-        rows = cursor.fetchall()
-    conn.close()
-    return rows
 
 
 @app.after_request
@@ -91,17 +67,24 @@ def test():
 
 @app.route("/api/register", methods=["POST"])
 def register():
-    return "HEre"
-    req_json = request.get_json()
+    req_json = request.json
     assert req_json
 
     print(req_json)
     name = req_json.get("name")
     email = req_json.get("email")
     password = req_json.get("password")
-    password = generate_password_hash(password)
-    loop.run_until_complete(dbf.register_user(name, email, password))
-    return ("Created", 201)
+    password_hash = generate_password_hash(password)
+
+    duplicate_email = database_query("SELECT * FROM instructor where email = $1", (email, ))
+    if duplicate_email:
+        return json.dumps({ "errors": ["That email already exists!"] })
+
+    query = "INSERT INTO instructor VALUES ($1, $2, $3);"
+    args = (name, email, password_hash)
+
+    database_execute(query, args)
+    return json.dumps({ "success": True })
 
 
 # @app.route("/get-genres")

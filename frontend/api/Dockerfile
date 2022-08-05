@@ -6,14 +6,18 @@ FROM python:3.9-slim
 ENV PYTHONUNBUFFERED True
 
 # Copy local code to the container image.
-ENV APP_HOME /app
-WORKDIR $APP_HOME
-COPY . ./
+RUN mkdir -p /pa-server
+WORKDIR /pa-server
 
 # Install production dependencies.
 RUN pip install --upgrade pip
 RUN pip install --upgrade pdm
-RUN pdm install
+
+COPY pdm.lock pyproject.toml /pa-server/
+RUN pdm sync --prod
+
+COPY . /pa-server
+
 
 # Run the web service on container startup. Here we use the gunicorn
 CMD exec pdm run start

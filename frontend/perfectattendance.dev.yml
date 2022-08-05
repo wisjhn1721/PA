@@ -5,4 +5,5 @@ services:
       - "$PWD/client:/pa-client"
   pa-server:
     volumes:
-      - "$PWD/api:/pa-server"
+      - "$PWD/api/main.py:/pa-server/main.py"
+      - "$PWD/api/psqlconnect.py:/pa-server/psqlconnect.py"
