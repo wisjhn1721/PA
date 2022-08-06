@@ -1,9 +1,9 @@
-version: "3.8"
-services:
-  pa-client:
-    volumes:
-      - "$PWD/client:/pa-client"
-  pa-server:
-    volumes:
-      - "$PWD/api/main.py:/pa-server/main.py"
-      - "$PWD/api/psqlconnect.py:/pa-server/psqlconnect.py"
+# version: "3.8"
+# services:
+#   pa-client:
+#     volumes:
+#       - "$PWD/client:/pa-client"
+#   pa-server:
+#     volumes:
+#       - "$PWD/api/main.py:/pa-server/main.py"
+#       - "$PWD/api/psqlconnect.py:/pa-server/psqlconnect.py"
