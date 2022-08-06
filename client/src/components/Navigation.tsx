@@ -8,7 +8,12 @@ import {
   UserOutlined,
 } from "@ant-design/icons";
 
-const Navigation = ({ user }: { user: {[key: string]: string} | null }) => {
+interface NavigationProps {
+  user: { [key: string]: string } | null;
+  onLoggedIn: () => void;
+}
+
+const Navigation = ({ user, onLoggedIn }: NavigationProps) => {
   const location = useLocation();
   const currentRoute = location.pathname;
 
@@ -30,6 +35,19 @@ const Navigation = ({ user }: { user: {[key: string]: string} | null }) => {
           <Menu.Item key="/scans" icon={<ScanOutlined />}>
             <Link to="/scans">Scans</Link>
           </Menu.Item>
+          <Menu.SubMenu
+            key="sub1"
+            style={{ position: "absolute", top: 0, right: 40 }}
+            icon={<UserOutlined style={{ fontSize: 20 }} />}
+          >
+            <Menu.Item
+              onClick={() => onLoggedIn()}
+              key="/logout"
+              icon={<LoginOutlined />}
+            >
+              <Link to="/">Logout</Link>
+            </Menu.Item>
+          </Menu.SubMenu>
         </>
       ) : (
         <Menu.SubMenu

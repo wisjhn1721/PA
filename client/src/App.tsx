@@ -43,7 +43,7 @@ const App = () => {
     <Router>
       <Layout className="site-layout">
         <Header>
-          <Navigation user={user} />
+          <Navigation user={user} onLoggedIn={() => setUser(null)} />
         </Header>
         <Content
           className="site-layout-background"

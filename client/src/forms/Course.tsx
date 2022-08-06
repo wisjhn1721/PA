@@ -1,7 +1,6 @@
 import axios from "axios";
 import { Button, Form, Input, DatePicker, Select } from "antd";
 import styled from "styled-components";
-import moment from 'moment';
 
 const { RangePicker } = DatePicker;
 const { Option } = Select;

@@ -15,22 +15,6 @@ interface DataType {
   endDate: string;
 }
 
-// const dummmyData = [
-//   {
-//     id: 1,
-//     name: "CS621 Adv Web Dev",
-//     instructor: "Dr. Unan",
-//     startDate: "06/09/2022",
-//     endDate: "08/12/2022"
-//   },
-//   {
-//     id: 2,
-//     name: "CS633 Cloud Computing",
-//     instructor: "Dr. Hasan",
-//     startDate: "06/09/2022",
-//     endDate: "08/12/2022"
-//   },
-// ];
 
 const columns: ColumnsType<DataType> = [
   {
@@ -65,17 +49,23 @@ const CourseList = ({ user }: { user: {[key: string]: string} | null }) => {
   const [courses, setCourses] = useState([]);
   const [onUpdate, setOnUpdate] = useState(false);
 
+  useEffect(() => {
+    getCourses();
+  }, []);
 
   useEffect(() => {
     getCourses();
   }, [onUpdate]);
 
+
   const getCourses = () => {
     setIsLoading(true);
     axios
-      .get("/api/get-courses")
+      .get(`/api/get-courses?instructor_id=${user!.id}`)
       .then((resp) => {
+        console.log(resp);
         const res = resp.data;
+        
         if (res) setCourses(res);
         setIsLoading(false)
       })

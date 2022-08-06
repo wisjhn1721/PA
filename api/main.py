@@ -5,9 +5,7 @@ import logging
 
 # PDM
 import flask_cors
-from flask_cors.decorator import cross_origin
-from flask import Flask, json, jsonify, request, send_file
-from werkzeug.wrappers.response import Response
+from flask import Flask, json, jsonify, request
 from werkzeug.security import check_password_hash, generate_password_hash
 
 
@@ -52,9 +50,8 @@ def get_courses():
     assert isinstance(request.args, dict)
     instructor_id = request.args.get("instructor_id")
     query = """SELECT c.id, c.name as course_name, c.start_date, c.end_date, 
-    i.full_name as instructor from course c, instructor i WHERE 
-    c.instructor = %s;"""
-
+    i.full_name as instructor from course c JOIN instructor i ON i.id::text = 
+    c.instructor::text WHERE i.id = %s;"""
     courses = database_query(query, (str(instructor_id), ))
     return jsonify([{**r} for r in courses])
 
@@ -74,6 +71,7 @@ def add_course():
         "INSERT INTO course (instructor, name, start_date, end_date) VALUES (%s, %s, %s, %s) RETURNING id;",
         (instructor_id, course_name, start_date, end_date),
     )
+    return ("Success", 201)
 
 
 @app.route("/api/login", methods=["POST"])
@@ -92,7 +90,7 @@ def login():
         pass_hash = account["password_hash"]
         print(check_password_hash(pass_hash, password))
         if check_password_hash(pass_hash, password):
-            return jsonify({"success": dict(possible_account)})
+            return jsonify({"success": dict(account)})
     return json.dumps({"errors": ["The email/password combination failed!"]})
 
 
@@ -116,7 +114,8 @@ def register():
     args = (name, email, password_hash)
 
     user = database_execute(query, args)
-    assert user, print("I failed")
+    assert user, print("Failed")
+
     return json.dumps({"success": dict(user)})
 
 

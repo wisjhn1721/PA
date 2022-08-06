@@ -28,8 +28,7 @@ def database_execute(query: str, args):
         ret = cursor.fetchone()
         conn.commit()
     conn.close()
-    if ret:
-        return ret[0]
+    return ret
 
 
 def database_query(query: str, args):
