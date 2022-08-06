@@ -1,6 +1,7 @@
+import axios from "axios";
 import { Button, Form, Input, DatePicker, Select } from "antd";
-import React from "react";
 import styled from "styled-components";
+import moment from 'moment';
 
 const { RangePicker } = DatePicker;
 const { Option } = Select;
@@ -13,12 +14,37 @@ const ContainerStyle = styled.div`
     border-radius: 7px;
 `
 
-const Course: React.FC = () => {
+interface CourseProps {
+  user: {[key: string]: string} | null;
+  onRefresh: (val: boolean) => void;
+}
+
+const Course = ({ user, onRefresh }: CourseProps) => {
   const [form] = Form.useForm();
 
 
   const onFinish = (values: any) => {
-    console.log(values);
+    const s_date = values.dates[0].format();
+    const e_date = values.dates[0].format();
+
+
+    const postData = {
+      "instructor_id": user!.id,
+      "course": values.name,
+      "start_date": s_date,
+      "end_date": e_date,
+      "students": []
+    }
+    console.log(postData);
+
+    axios
+    .post("/api/add-course", postData)
+    .then((_) => {
+        onRefresh(true);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
   };
 
   return (
@@ -26,13 +52,6 @@ const Course: React.FC = () => {
       <h1 style={{ textAlign: "center" }}>Add Course</h1>
       <Form form={form} onFinish={onFinish}>
         <Form.Item name="name" label="Course Name" rules={[{ required: true }]}>
-          <Input />
-        </Form.Item>
-        <Form.Item
-          name="instructor"
-          label="Course Instructor"
-          rules={[{ required: true }]}
-        >
           <Input />
         </Form.Item>
         <Form.Item

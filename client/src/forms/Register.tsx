@@ -11,7 +11,7 @@ const Container = styled.div`
 `;
 
 interface RegisterProps {
-  onLoggedIn: (val: boolean) => void;
+  onLoggedIn: (val: {[key: string]: string;}) => void;
 }
 
 const Register = ({ onLoggedIn }: RegisterProps) => {
@@ -25,7 +25,7 @@ const Register = ({ onLoggedIn }: RegisterProps) => {
         console.log(resp);
         const res = resp.data;
         if (res.success) {
-          onLoggedIn(true);
+          onLoggedIn(res.success);
           navigate("/");
 
           return;

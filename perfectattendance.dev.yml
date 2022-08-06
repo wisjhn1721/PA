@@ -1,8 +1,8 @@
 version: "3.8"
 services:
-  # pa-client:
-  #   volumes:
-  #     - "$PWD/client:/pa-client"
+  pa-client:
+    volumes:
+      - "$PWD/client:/pa-client"
   pa-server:
     volumes:
       - "$PWD/api/main.py:/pa-server/main.py"

@@ -12,7 +12,7 @@ const Container = styled.div`
 `;
 
 interface LoginProps {
-  onLoggedIn: (val: boolean) => void;
+  onLoggedIn: (val: {[key: string]: string;}) => void;
 }
 
 const Login = ({ onLoggedIn }: LoginProps) => {
@@ -25,7 +25,7 @@ const Login = ({ onLoggedIn }: LoginProps) => {
       .then((resp) => {
         const res = resp.data;
         if (res.success) {
-          onLoggedIn(true);
+          onLoggedIn(res.success);
           navigate("/");
           return;
         }

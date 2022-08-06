@@ -22,10 +22,14 @@ def _connect():
 
 def database_execute(query: str, args):
     conn = _connect()
-    with conn.cursor() as cursor:
+    ret = None
+    with conn.cursor(cursor_factory=DictCursor) as cursor:
         cursor.execute(query, args)
+        ret = cursor.fetchone()
         conn.commit()
     conn.close()
+    if ret:
+        return ret[0]
 
 
 def database_query(query: str, args):

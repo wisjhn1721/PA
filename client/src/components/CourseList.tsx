@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import axios from "axios";
 import { Table } from "antd";
 import type { ColumnsType } from 'antd/es/table';
 
@@ -14,28 +15,28 @@ interface DataType {
   endDate: string;
 }
 
-const dummmyData = [
-  {
-    id: 1,
-    name: "CS621 Adv Web Dev",
-    instructor: "Dr. Unan",
-    startDate: "06/09/2022",
-    endDate: "08/12/2022"
-  },
-  {
-    id: 2,
-    name: "CS633 Cloud Computing",
-    instructor: "Dr. Hasan",
-    startDate: "06/09/2022",
-    endDate: "08/12/2022"
-  },
-];
+// const dummmyData = [
+//   {
+//     id: 1,
+//     name: "CS621 Adv Web Dev",
+//     instructor: "Dr. Unan",
+//     startDate: "06/09/2022",
+//     endDate: "08/12/2022"
+//   },
+//   {
+//     id: 2,
+//     name: "CS633 Cloud Computing",
+//     instructor: "Dr. Hasan",
+//     startDate: "06/09/2022",
+//     endDate: "08/12/2022"
+//   },
+// ];
 
 const columns: ColumnsType<DataType> = [
   {
     title: 'Name',
-    dataIndex: 'name',
-    key: 'name',
+    dataIndex: 'course_name',
+    key: 'course_name',
     width: '25%',
   },
   {
@@ -46,30 +47,54 @@ const columns: ColumnsType<DataType> = [
   },
   {
     title: 'Start Date',
-    dataIndex: 'startDate',
+    dataIndex: 'start_date',
     key: 'startDate',
     width: '25%',
   },
   {
     title: 'End Date',
-    dataIndex: 'endDate',
+    dataIndex: 'end_date',
     key: 'endDate',
     width: '25%',
   },
 ];
 
 
-const CourseList = () => {
+const CourseList = ({ user }: { user: {[key: string]: string} | null }) => {
   const [isLoading, setIsLoading] = useState(false);
-  
+  const [courses, setCourses] = useState([]);
+  const [onUpdate, setOnUpdate] = useState(false);
+
+
+  useEffect(() => {
+    getCourses();
+  }, [onUpdate]);
+
+  const getCourses = () => {
+    setIsLoading(true);
+    axios
+      .get("/api/get-courses")
+      .then((resp) => {
+        const res = resp.data;
+        if (res) setCourses(res);
+        setIsLoading(false)
+      })
+      .catch((error) => {
+        setIsLoading(false)
+        console.log(error);
+      });
+  }
+
+  console.log(courses);
+
   return (
     <Table
       size="middle"
-      dataSource={dummmyData}
+      dataSource={courses}
       columns={columns}
       rowKey={"id"}
       loading={isLoading}
-      footer={() => <Course />}
+      footer={() => <Course user={user} onRefresh={(val) => setOnUpdate(val)} />}
     />
   );
 };

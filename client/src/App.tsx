@@ -17,7 +17,7 @@ const { Header, Content, Footer } = Layout;
 
 
 const App = () => {
-  const [user, setUser] = useState(false);
+  const [user, setUser] = useState<{[key: string]: string} | null>(null);
 
   const routes = [
     {
@@ -50,7 +50,7 @@ const App = () => {
           style={{ margin: "22px 16px", padding: 40 }}
         >
           <Routes>
-            <Route path="/" element={user ? <CourseList /> : <Home />} />
+            <Route path="/" element={user ? <CourseList user={user} /> : <Home />} />
             
             {routes.map(({ path, Component }, i) => (
               <Route

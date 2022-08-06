@@ -8,7 +8,7 @@ import {
   UserOutlined,
 } from "@ant-design/icons";
 
-const Navigation = ({ user }: { user: boolean }) => {
+const Navigation = ({ user }: { user: {[key: string]: string} | null }) => {
   const location = useLocation();
   const currentRoute = location.pathname;
 
